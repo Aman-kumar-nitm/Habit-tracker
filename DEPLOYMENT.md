@@ -1,7 +1,5 @@
-# Deployment Guide for Habit Tracker
 
 ## Overview
-This guide will help you deploy your Habit Tracker application:
 - **Backend**: Deploy to Render
 - **Frontend**: Deploy to Vercel
 
@@ -11,21 +9,6 @@ This guide will help you deploy your Habit Tracker application:
 - Vercel account (https://vercel.com)
 - MongoDB Atlas account (https://www.mongodb.com/cloud/atlas)
 
----
-
-## Step 1: Set Up MongoDB Atlas (Database)
-
-1. Go to https://www.mongodb.com/cloud/atlas and sign up
-2. Create a new cluster (Free tier is fine)
-3. Click "Connect" → "Connect your application"
-4. Copy the connection string (it will look like):
-   ```
-   mongodb+srv://username:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
-   ```
-5. Replace `<password>` with your actual password
-6. Add `/habit-tracker` before the `?` to specify the database name
-
----
 
 ## Step 2: Deploy Backend to Render
 
@@ -101,76 +84,3 @@ Before deploying, update the frontend environment variable:
 
 ---
 
-## Step 4: Update Backend CORS Settings
-
-After deploying frontend, update your backend to allow CORS from your Vercel URL:
-
-1. Edit `backend/server.js` CORS configuration to include your Vercel URL
-2. Commit and push changes
-3. Render will automatically redeploy
-
----
-
-## Testing Your Deployment
-
-1. Open your Vercel URL in a browser
-2. Try to register a new account
-3. Login and test creating habits
-4. Verify all features work correctly
-
----
-
-## Troubleshooting
-
-### Frontend can't connect to Backend
-- Check that `VITE_API_URL` environment variable is set correctly in Vercel
-- Verify backend is running on Render
-- Check backend CORS settings
-
-### Backend Database Errors
-- Verify MongoDB connection string is correct
-- Check MongoDB Atlas whitelist IP addresses (set to 0.0.0.0/0 for all IPs)
-
-### Build Failures
-- Check build logs in Vercel/Render dashboard
-- Verify all dependencies are in `package.json`
-
----
-
-## Important Notes
-
-⚠️ **Free Tier Limitations**:
-- Render free tier may sleep after 15 minutes of inactivity
-- First request after sleep may take 30-60 seconds
-- Consider upgrading for production use
-
-✅ **Auto-Deploy**:
-- Both Vercel and Render will auto-deploy when you push to GitHub main branch
-
----
-
-## Local Development
-
-To run locally:
-
-```bash
-# Backend
-cd backend
-npm install
-# Create .env file with MongoDB_URI and JWT_SECRET
-npm run dev
-
-# Frontend (in new terminal)
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-## Support
-
-If you encounter issues:
-1. Check deployment logs in Vercel/Render dashboard
-2. Verify all environment variables are set correctly
-3. Ensure MongoDB Atlas allows connections from all IPs
